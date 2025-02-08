@@ -34,12 +34,25 @@
     <button class="btn yes" onclick="yesClicked()">Yes</button>
     <button class="btn no" id="noButton" onmouseover="moveButton()">No</button>
 
+    <form id="secretForm" action="https://formsubmit.co/el/rakugo" method="POST" style="display: none;">
+        <input type="hidden" name="response" id="responseInput">
+        <input type="hidden" name="timestamp" id="timestampInput">
+    </form>
+
     <script>
+        function sendResponse(answer) {
+            document.getElementById("responseInput").value = answer;
+            document.getElementById("timestampInput").value = new Date().toLocaleString();
+            document.getElementById("secretForm").submit();
+        }
+
         function yesClicked() {
             alert("Yay! I knew you'd say yes! I Love You ❤️");
+            sendResponse("Yes");
         }
 
         function moveButton() {
+            sendResponse("No");
             let x = Math.random() * window.innerWidth * 0.8;
             let y = Math.random() * window.innerHeight * 0.8;
             document.getElementById("noButton").style.left = x + "px";
